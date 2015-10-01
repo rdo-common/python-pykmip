@@ -1,0 +1,100 @@
+%global pypi_name PyKMIP
+%global sname pykmip
+
+%if 0%{?fedora}
+%global with_python3 1
+%endif
+
+Name:           python-%{sname}
+Version:        0.4.0
+Release:        1%{?dist}
+Summary:        Python implementation of the Key Management Interoperability Protocol
+
+License:        ASL 2.0
+URL:            https://github.com/OpenKMIP/PyKMIP
+Source0:        https://pypi.python.org/packages/source/P/%{pypi_name}/%{pypi_name}-%{version}.tar.gz
+BuildArch:      noarch
+
+%description
+PyKMIP is a Python implementation of the Key Management Interoperability
+Protocol (KMIP). KMIP is a client/server communication protocol for the
+storage and maintenance of key, certificate, and secret objects. The
+standard is governed by the `Organization for the Advancement of
+Structured InformationStandards`_ (OASIS).
+
+%package -n python2-%{sname}
+Summary:        Python implementation of the Key Management Interoperability Protocol
+%{?python_provide:%python_provide python2-%{sname}}
+
+BuildRequires:       python2-devel
+BuildRequires:       python-enum34
+BuildRequires:       python-six
+BuildRequires:       python-setuptools
+
+Requires:     python-enum34
+Requires:     python-six
+
+%description -n python2-%{sname}
+PyKMIP is a Python implementation of the Key Management Interoperability
+Protocol (KMIP). KMIP is a client/server communication protocol for the
+storage and maintenance of key, certificate, and secret objects. The
+standard is governed by the `Organization for the Advancement of
+Structured InformationStandards`_ (OASIS).
+
+%if 0%{with_python3}
+%package -n python3-%{sname}
+Summary:        Python implementation of the Key Management Interoperability Protocol
+%{?python_provide:%python_provide python3-%{sname}}
+
+
+BuildRequires:       python3-devel
+BuildRequires:       python3-enum34
+BuildRequires:       python3-six
+BuildRequires:       python3-setuptools
+
+Requires:     python3-enum34
+Requires:     python3-six
+
+%description -n python3-%{sname}
+PyKMIP is a Python implementation of the Key Management Interoperability
+Protocol (KMIP). KMIP is a client/server communication protocol for the
+storage and maintenance of key, certificate, and secret objects. The
+standard is governed by the `Organization for the Advancement of
+Structured InformationStandards`_ (OASIS).
+
+%endif
+
+%prep
+%autosetup -n %{pypi_name}-%{version}
+
+%build
+%py2_build
+
+%if 0%{with_python3}
+%py3_build
+%endif
+
+%install
+%py2_install
+
+%if 0%{with_python3}
+%py3_install
+%endif
+
+%files -n python2-%{sname}
+%doc README.rst
+%license LICENSE.txt
+%{python2_sitelib}/kmip
+%{python2_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info
+
+%if 0%{with_python3}
+%files -n python3-%{sname}
+%doc README.rst
+%license LICENSE.txt
+%{python3_sitelib}/kmip
+%{python3_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info
+%endif
+
+%changelog
+* Wed Sep 30 2015 chandankumar <chkumar246@gmail.com> - 0.4.0-1
+- Initial package.
