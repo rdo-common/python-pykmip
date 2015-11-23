@@ -48,11 +48,9 @@ Summary:        Python implementation of the Key Management Interoperability Pro
 
 
 BuildRequires:       python3-devel
-BuildRequires:       python3-enum34
 BuildRequires:       python3-six
 BuildRequires:       python3-setuptools
 
-Requires:     python3-enum34
 Requires:     python3-six
 
 %description -n python3-%{sname}
@@ -98,6 +96,7 @@ Structured InformationStandards`_ (OASIS).
 %changelog
 * Tue Nov 10 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org>
 - Rebuilt for https://fedoraproject.org/wiki/Changes/python3.5
+- Remove python3-enum34 as enum is now part of stdlib in python3
 
 * Wed Sep 30 2015 chandankumar <chkumar246@gmail.com> - 0.4.0-1
 - Initial package.
