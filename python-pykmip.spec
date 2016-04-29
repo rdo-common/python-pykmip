@@ -6,8 +6,8 @@
 %endif
 
 Name:           python-%{sname}
-Version:        0.4.0
-Release:        6%{?dist}
+Version:        0.5.0
+Release:        1%{?dist}
 Summary:        Python implementation of the Key Management Interoperability Protocol
 
 License:        ASL 2.0
@@ -41,7 +41,7 @@ storage and maintenance of key, certificate, and secret objects. The
 standard is governed by the `Organization for the Advancement of
 Structured InformationStandards`_ (OASIS).
 
-%if 0%{with_python3}
+%if 0%{?with_python3}
 %package -n python3-%{sname}
 Summary:        Python implementation of the Key Management Interoperability Protocol
 %{?python_provide:%python_provide python3-%{sname}}
@@ -68,32 +68,40 @@ Structured InformationStandards`_ (OASIS).
 %build
 %py2_build
 
-%if 0%{with_python3}
+%if 0%{?with_python3}
 %py3_build
 %endif
 
 %install
-%py2_install
-
-%if 0%{with_python3}
+%if 0%{?with_python3}
 %py3_install
 %endif
+
+%py2_install
+
 
 %files -n python2-%{sname}
 %doc README.rst
 %license LICENSE.txt
+%if !0%{?with_python3}
+%{_bindir}/pykmip-server
+%endif
 %{python2_sitelib}/kmip
 %{python2_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info
 
-%if 0%{with_python3}
+%if 0%{?with_python3}
 %files -n python3-%{sname}
 %doc README.rst
 %license LICENSE.txt
+%{_bindir}/pykmip-server
 %{python3_sitelib}/kmip
 %{python3_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info
 %endif
 
 %changelog
+* Wed Apr 05 2017 Haikel Guemar <hguemar@fedoraproject.org> 0.5.0-1
+- Update to 0.5.0
+
 * Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.4.0-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
