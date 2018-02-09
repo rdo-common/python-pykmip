@@ -7,7 +7,7 @@
 
 Name:           python-%{sname}
 Version:        0.5.0
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Python implementation of the Key Management Interoperability Protocol
 
 License:        ASL 2.0
@@ -27,12 +27,12 @@ Summary:        Python implementation of the Key Management Interoperability Pro
 %{?python_provide:%python_provide python2-%{sname}}
 
 BuildRequires:       python2-devel
-BuildRequires:       python-enum34
-BuildRequires:       python-six
-BuildRequires:       python-setuptools
+BuildRequires:       python2-enum34
+BuildRequires:       python2-six
+BuildRequires:       python2-setuptools
 
-Requires:     python-enum34
-Requires:     python-six
+Requires:     python2-enum34
+Requires:     python2-six
 
 %description -n python2-%{sname}
 PyKMIP is a Python implementation of the Key Management Interoperability
@@ -98,6 +98,10 @@ Structured InformationStandards`_ (OASIS).
 %endif
 
 %changelog
+* Fri Feb 09 2018 Iryna Shcherbina <ishcherb@redhat.com> - 0.5.0-5
+- Update Python 2 dependency declarations to new packaging standards
+  (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
+
 * Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.5.0-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
