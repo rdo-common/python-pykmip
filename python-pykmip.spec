@@ -7,7 +7,7 @@
 
 Name:           python-%{sname}
 Version:        0.5.0
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        Python implementation of the Key Management Interoperability Protocol
 
 License:        ASL 2.0
@@ -16,25 +16,6 @@ Source0:        https://pypi.python.org/packages/source/P/%{pypi_name}/%{pypi_na
 BuildArch:      noarch
 
 %description
-PyKMIP is a Python implementation of the Key Management Interoperability
-Protocol (KMIP). KMIP is a client/server communication protocol for the
-storage and maintenance of key, certificate, and secret objects. The
-standard is governed by the `Organization for the Advancement of
-Structured InformationStandards`_ (OASIS).
-
-%package -n python2-%{sname}
-Summary:        Python implementation of the Key Management Interoperability Protocol
-%{?python_provide:%python_provide python2-%{sname}}
-
-BuildRequires:       python2-devel
-BuildRequires:       python2-enum34
-BuildRequires:       python2-six
-BuildRequires:       python2-setuptools
-
-Requires:     python2-enum34
-Requires:     python2-six
-
-%description -n python2-%{sname}
 PyKMIP is a Python implementation of the Key Management Interoperability
 Protocol (KMIP). KMIP is a client/server communication protocol for the
 storage and maintenance of key, certificate, and secret objects. The
@@ -66,27 +47,16 @@ Structured InformationStandards`_ (OASIS).
 %autosetup -n %{pypi_name}-%{version}
 
 %build
-%py2_build
 
 %if 0%{?with_python3}
 %py3_build
 %endif
 
 %install
-%py2_install
 
 %if 0%{?with_python3}
 %py3_install
 %endif
-
-%files -n python2-%{sname}
-%doc README.rst
-%license LICENSE.txt
-%if !0%{?with_python3}
-%{_bindir}/pykmip-server
-%endif
-%{python2_sitelib}/kmip
-%{python2_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info
 
 %if 0%{?with_python3}
 %files -n python3-%{sname}
@@ -98,6 +68,10 @@ Structured InformationStandards`_ (OASIS).
 %endif
 
 %changelog
+* Thu Oct 11 2018 Zbigniew Jędrzejewski-Szmek <zbyszek@in.waw.pl> - 0.5.0-8
+- Python2 binary package has been removed
+  See https://fedoraproject.org/wiki/Changes/Mass_Python_2_Package_Removal
+
 * Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.5.0-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
