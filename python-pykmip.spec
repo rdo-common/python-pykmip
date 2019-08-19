@@ -11,7 +11,7 @@
 
 Name:           python-%{sname}
 Version:        0.8.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Python implementation of the Key Management Interoperability Protocol
 
 License:        ASL 2.0
@@ -126,6 +126,9 @@ Structured InformationStandards`_ (OASIS).
 %endif
 
 %changelog
+* Mon Aug 19 2019 Miro Hrončok <mhroncok@redhat.com> - 0.8.0-3
+- Rebuilt for Python 3.8
+
 * Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.8.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
